@@ -5,6 +5,7 @@ const Container = styled.section`
 		text-align: center;
 		background: linear-gradient(to left, #eecda3 0%, #ef629f 100%);
 		background-clip: text;
+		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
 	.content {

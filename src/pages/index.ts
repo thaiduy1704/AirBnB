@@ -7,6 +7,7 @@ import Resgister from './Register/Register';
 import RoomDetail from './RoomDetail/RoomDetail';
 import RoomList from './RoomList/RoomList';
 import User from './User/User';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export {
 	Admin,
@@ -18,4 +19,5 @@ export {
 	RoomDetail,
 	RoomList,
 	User,
+	PrivateRoute
 };

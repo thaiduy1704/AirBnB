@@ -42,7 +42,7 @@ export interface IRegister {
 	password: string;
 	phone: string;
 	birthday: string;
-	gender: boolean;
+	gender: string;
 	address: string;
 }
 
@@ -82,6 +82,17 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 	'auth/register',
 	async (user, thunkAPI) => {
 		try {
+			const test = {
+				name: user.name,
+				email: user.email,
+				password: user.password,
+				phone: user.phone,
+				birthday: user.birthday,
+				gender: user.gender,
+				address: user.address,
+			};
+			console.log(test);
+
 			const params = {
 				method: 'POST',
 				url: `${URL}/register`,
@@ -91,7 +102,7 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 					password: user.password,
 					phone: user.phone,
 					birthday: user.birthday,
-					gender: user.gender,
+					gender: user.gender === 'Man' ? true : false,
 					address: user.address,
 				},
 			};

@@ -12,6 +12,8 @@ import SingleRoomCatalog from './SingleRoomCatalog/SingleRoomCatalog';
 import SingleRoomDetail from './SingleRoomDetail/SingleRoomDetail';
 import SingleRoomInfo from './SingleRoomInfo/SingleRoomInfo';
 import Catalog from './Catalog/Catalog';
+import ModalNavbar from './ModalNavbar/ModalNavbar';
+import ModalLocationNav from './ModalLocationNav/ModalLocationNav';
 
 export {
 	Navbar,
@@ -28,4 +30,6 @@ export {
 	SingleRoomDetail,
 	SingleRoomInfo,
 	Catalog,
+	ModalNavbar,
+	ModalLocationNav,
 };

@@ -12,7 +12,7 @@ type FormInputs = {
 	password: string;
 	phone: string;
 	birthday: string;
-	gender: boolean;
+	gender: string;
 	address: string;
 };
 

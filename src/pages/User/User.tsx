@@ -2,6 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { MdOutlineVerifiedUser } from 'react-icons/md';
 import { TiTickOutline } from 'react-icons/ti';
 import { useAppSelector } from '../../redux/hooks/hooks';
+import { transformDate } from '../../utils/util';
 
 import { Container } from './style';
 import { Navbar } from '../../components';
@@ -34,7 +35,7 @@ const User = () => {
 				<div className='user__info'>
 					<img
 						className='user__image'
-						src={avatar ? avatar : '../../images/defaultImage'}
+						src={avatar ? avatar : '../../images/default-user-image.jpg'}
 						alt={name}
 					/>
 					<h5>Upload user image</h5>
@@ -59,7 +60,7 @@ const User = () => {
 					<ul>
 						<li>Email: {email}</li>
 						<li>Phone: {phone}</li>
-						<li>Birthday: {birthday}</li>
+						<li>Birthday: {transformDate(new Date(birthday))}</li>
 						<li>Gender: {gender ? 'male' : 'female'}</li>
 						<li>Address: {address}</li>
 						<li>Type: {type}</li>

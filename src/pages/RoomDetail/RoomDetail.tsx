@@ -17,7 +17,7 @@ const RoomDetail = () => {
 
 	useEffect(() => {
 		dispatch(getRoomDetailById(id as string));
-	}, [dispatch, id]);
+	}, [id]);
 
 	const { isLoading } = useAppSelector((store) => store.room);
 	if (isLoading) {
