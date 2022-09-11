@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IRoom } from '../../../@types/Room';
-import { getRoomDetailById, getRoomListByLocationId } from './RoomThunk';
+import {
+	bookRoomById,
+	createNewRoom,
+	deleteRoomById,
+	getRoomDetailById,
+	getRoomListByLocationId,
+	updateRoomById,
+} from './RoomThunk';
 
 export interface IRoomState {
 	roomList: IRoom[];
@@ -51,6 +58,50 @@ const roomSlice = createSlice({
 			state.roomSelected = payload;
 		});
 		builder.addCase(getRoomDetailById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+		builder.addCase(bookRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(bookRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(bookRoomById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+		builder.addCase(createNewRoom.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(createNewRoom.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(createNewRoom.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+		builder.addCase(updateRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(updateRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(updateRoomById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+		builder.addCase(deleteRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(deleteRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(deleteRoomById.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload as string;
 		});

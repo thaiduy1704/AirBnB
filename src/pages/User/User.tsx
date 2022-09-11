@@ -64,7 +64,9 @@ const User = () => {
 						<li>Gender: {gender ? 'male' : 'female'}</li>
 						<li>Address: {address}</li>
 						<li>Type: {type}</li>
-						<li>tickets: {tickets}</li>
+						<li>
+							tickets: {tickets?.length === 0 ? 'null' : tickets?.join(', ')}
+						</li>
 					</ul>
 				</div>
 			</Container>

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

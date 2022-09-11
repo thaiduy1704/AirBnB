@@ -14,7 +14,8 @@ import SingleRoomInfo from './SingleRoomInfo/SingleRoomInfo';
 import Catalog from './Catalog/Catalog';
 import ModalNavbar from './ModalNavbar/ModalNavbar';
 import ModalLocationNav from './ModalLocationNav/ModalLocationNav';
-
+import Calender from './Calender/Calender';
+import Card from './Card/Card';
 export {
 	Navbar,
 	Footer,
@@ -32,4 +33,6 @@ export {
 	Catalog,
 	ModalNavbar,
 	ModalLocationNav,
+	Calender,
+	Card,
 };

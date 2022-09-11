@@ -5,8 +5,14 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
 import { logo } from '../../constant/logo';
+import { transformDate } from '../../utils/util';
+import Calender from '../Calender/Calender';
 
-export interface ISingleRoomInfo extends IRoom {}
+export interface ISingleRoomInfo extends IRoom {
+	bookDate: any;
+	countNight: number;
+	setBookDate: any;
+}
 
 const SingleRoomInfo = ({
 	name,
@@ -24,6 +30,9 @@ const SingleRoomInfo = ({
 	wifi,
 	heating,
 	cableTV,
+	bookDate,
+	setBookDate,
+	countNight,
 }: ISingleRoomInfo) => {
 	return (
 		<Container>
@@ -141,7 +150,16 @@ const SingleRoomInfo = ({
 			<div className='line'></div>
 			{/*Calender*/}
 
-			<div className='detail__calender'></div>
+			<div className='detail__calender'>
+				<h3>
+					{countNight}{' '}
+					<span style={{ textTransform: 'lowercase' }}>nights in</span> {name}
+				</h3>
+				<p>
+					{transformDate(bookDate.checkIn)} - {transformDate(bookDate.checkOut)}
+				</p>
+				<Calender setBookDate={setBookDate} />
+			</div>
 		</Container>
 	);
 };

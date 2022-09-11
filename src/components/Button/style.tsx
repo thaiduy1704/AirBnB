@@ -1,18 +1,26 @@
 import styled from 'styled-components';
 
-export const Container = styled.button`
+interface Props {
+	fullWidth?: boolean;
+	bgColor?: string;
+}
+
+const StyledContainer = styled.button<Props>`
+	width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 	position: relative;
 	color: white;
 	font-size: 2rem;
 	border-radius: var(--radius);
-	padding: 1rem 1rem;
-	background: var(--clr-gradient);
+	padding: 1rem;
+	background: ${(props) =>
+		props.bgColor ? props.bgColor : 'var(--clr-gradient)'};
 	transition: var(--transition);
-	width: 100%;
+
 	h4 {
 		position: relative;
-		z-index: 1000;
+		z-index: 10;
 		margin: 0;
+		cursor: pointer;
 	}
 
 	::after {
@@ -34,3 +42,5 @@ export const Container = styled.button`
 		}
 	}
 `;
+
+export { StyledContainer };
