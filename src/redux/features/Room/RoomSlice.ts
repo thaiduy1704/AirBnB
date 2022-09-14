@@ -4,6 +4,7 @@ import {
 	bookRoomById,
 	createNewRoom,
 	deleteRoomById,
+	getAllRoom,
 	getRoomDetailById,
 	getRoomListByLocationId,
 	updateRoomById,
@@ -36,6 +37,20 @@ const roomSlice = createSlice({
 		},
 	},
 	extraReducers(builder) {
+	builder.addCase(getAllRoom.pending, (state) => {
+		state.isLoading = true;
+	});
+
+	builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
+		state.isLoading = false;
+		state.roomList = payload;
+	});
+	builder.addCase(getAllRoom.rejected, (state, { payload }) => {
+		state.isLoading = false;
+		state.error = payload as string;
+	});
+
+
 		builder.addCase(getRoomListByLocationId.pending, (state) => {
 			state.isLoading = true;
 		});

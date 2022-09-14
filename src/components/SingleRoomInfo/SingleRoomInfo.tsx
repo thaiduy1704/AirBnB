@@ -4,7 +4,7 @@ import { Container } from './style';
 import { AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
-import { logo } from '../../constant/logo';
+import { logo } from '../../constant/Logo/logo';
 import { transformDate } from '../../utils/util';
 import Calender from '../Calender/Calender';
 

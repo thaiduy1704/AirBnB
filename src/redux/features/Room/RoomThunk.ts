@@ -6,6 +6,33 @@ import { UNAUTHENTICATED, UNAUTHORIZED } from '../../../constant/Error/Error';
 
 const URL = '/api/rooms';
 
+const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
+	'room/getAllRooms',
+	async (_, thunkAPI) => {
+		try {
+			const { auth } = thunkAPI.getState().auth;
+			if (!auth) {
+				return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+			}
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			const params = {
+				method: 'GET',
+				url: `${URL}`,
+				header: {
+					token,
+				},
+			};
+			const response = await axiosInstance.request(params);
+			return response.data;
+		} catch (error: any) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
 const getRoomListByLocationId = createAsyncThunk<
 	IRoom[],
 	void,
@@ -190,6 +217,7 @@ const deleteRoomById = createAsyncThunk<string, string, { state: RootState }>(
 
 export {
 	getRoomListByLocationId,
+	getAllRoom,
 	getRoomDetailById,
 	bookRoomById,
 	createNewRoom,

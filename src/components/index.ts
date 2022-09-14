@@ -16,6 +16,11 @@ import ModalNavbar from './ModalNavbar/ModalNavbar';
 import ModalLocationNav from './ModalLocationNav/ModalLocationNav';
 import Calender from './Calender/Calender';
 import Card from './Card/Card';
+import UserDashBoard from './UserDashBoard/UserDashBoard';
+import LocationDashBoard from './LocationDashBoard/LocationDashBoard';
+import RoomDashBoard from './RoomDashBoard/RoomDashBoard';
+import ModalUser from './ModalUser/ModalUser';
+
 export {
 	Navbar,
 	Footer,
@@ -35,4 +40,8 @@ export {
 	ModalLocationNav,
 	Calender,
 	Card,
+	UserDashBoard,
+	LocationDashBoard,
+	RoomDashBoard,
+	ModalUser,
 };

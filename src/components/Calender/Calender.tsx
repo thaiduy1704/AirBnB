@@ -11,12 +11,8 @@ const Calender = ({ setBookDate }: ICalender) => {
 		query: '(max-width: 992px)',
 	});
 	const currentDate = new Date();
-	const nextDate = new Date();
-	nextDate.setDate(currentDate.getDate());
-	console.log('curent', currentDate);
-	console.log(nextDate);
+
 	const [value, setValue] = useState<any>(currentDate);
-	console.log('value', value);
 
 	useEffect(() => {
 		if (value.length == 2) {

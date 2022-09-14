@@ -5,3 +5,14 @@ export interface IAuth {
 	user: IUser;
 	token: string;
 }
+
+export interface IRegister {
+	name: string;
+	email: string;
+	password: string;
+	phone: string;
+	birthday: string;
+	gender: string;
+	address: string;
+	type?: 'ADMIN' | 'CLIENT';
+}

@@ -7,7 +7,7 @@ export interface IUser {
 	password: string;
 	phone: string;
 	birthday: string;
-	gender: boolean;
+	gender: string;
 	address: string;
 	type: 'ADMIN' | 'CLIENT';
 	__v: number;
