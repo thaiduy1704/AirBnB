@@ -16,7 +16,7 @@ const Container = styled.header`
 	width: 100%;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 10000;
 	height: 8rem;
 	border-bottom: 2px solid var(--clr-secondary);
 	padding-inline: 8rem;

@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { transformLanguage } from '../../../utils/util';
 import { IUser } from '../../../@types/User';
 import {
 	createUser,
@@ -11,6 +12,8 @@ import {
 
 export interface IUserState {
 	userList: IUser[];
+	searchedUser: IUser[];
+
 	userSelected: IUser | null;
 	successMsg: string;
 	error: string;
@@ -19,6 +22,7 @@ export interface IUserState {
 
 const initialState: IUserState = {
 	userList: [],
+	searchedUser: [],
 	userSelected: null,
 	successMsg: '',
 	error: '',
@@ -28,7 +32,17 @@ const initialState: IUserState = {
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+		searchUser: (state: IUserState, action: PayloadAction<string>) => {
+			const temp = state.userList.filter((user) => {
+				if (!user.name) return false;
+				const tempUserName = transformLanguage(user.name);
+				return tempUserName.includes(action.payload);
+			});
+
+			state.searchedUser = temp;
+		},
+	},
 	extraReducers(builder) {
 		builder.addCase(getAllUsers.pending, (state) => {
 			state.isLoading = true;
@@ -36,6 +50,7 @@ const userSlice = createSlice({
 		builder.addCase(getAllUsers.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.userList = payload;
+			state.searchedUser = payload;
 			state.successMsg = 'success getAllUser';
 		});
 		builder.addCase(getAllUsers.rejected, (state, { payload }) => {
@@ -111,4 +126,5 @@ const userSlice = createSlice({
 		});
 	},
 });
+export const { searchUser } = userSlice.actions;
 export default userSlice.reducer;

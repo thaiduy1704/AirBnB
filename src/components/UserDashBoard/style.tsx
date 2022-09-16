@@ -10,6 +10,27 @@ const StyledContainer = styled.section`
 
 const StyledSearchButton = styled(Button)``;
 
+const StyledRefreshButton = styled.button<{ isSpin?: boolean }>`
+	font-size: 3rem;
+	animation: ${(props) => (props.isSpin ? 'spin-animation 3s 0.5s' : 'none')};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	svg {
+		font-size: 3rem;
+		color: var(--clr-success);
+	}
+`;
+
+const StyledHeadButtonContainer = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
 const StyledSearchContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 20rem;
@@ -19,12 +40,15 @@ const StyledSearchContainer = styled.div`
 `;
 
 const StyledSearch = styled.input`
-	font-size: 2rem;
+	font-size: 2.5rem;
+	padding-left: 1rem;
 `;
 
 const StyledTableContainer = styled.div`
+	position: relative;
 	overflow-x: scroll;
 	margin-inline: auto;
+	min-height: 40rem;
 	width: 100%;
 `;
 
@@ -97,6 +121,7 @@ export {
 	StyledContainer,
 	StyledSearchButton,
 	StyledSearchContainer,
+	StyledHeadButtonContainer,
 	StyledSearch,
 	StyledTableContainer,
 	StyledTable,
@@ -110,4 +135,5 @@ export {
 	StyledPrevButton,
 	StyledNextButton,
 	StyledPageButton,
+	StyledRefreshButton,
 };

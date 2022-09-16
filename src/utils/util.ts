@@ -23,4 +23,24 @@ const transformDate = (date: Date) => {
 	return moment(date).format('Do MMMM YYYY');
 };
 
-export { transformLanguage, transformDate };
+const mapOriginValueToFormInput = (key: string, originValue: string) => {
+	let value: any = 'Not Provided';
+	let inputType = 'text';
+
+	if (typeof originValue === 'boolean') {
+		value = originValue;
+		inputType = 'checkbox';
+	} else if (key === 'birthday') {
+		value = new Date(originValue).toISOString().substring(0, 10);
+		inputType = 'date';
+	} else if (typeof originValue === 'number') {
+		value = 0;
+		inputType = 'number';
+	} else if (typeof originValue === 'string') {
+		value = originValue ? originValue : 'Not Provided';
+	}
+
+	return { value, inputType };
+};
+
+export { transformLanguage, transformDate, mapOriginValueToFormInput };

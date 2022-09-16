@@ -20,6 +20,7 @@ import UserDashBoard from './UserDashBoard/UserDashBoard';
 import LocationDashBoard from './LocationDashBoard/LocationDashBoard';
 import RoomDashBoard from './RoomDashBoard/RoomDashBoard';
 import ModalUser from './ModalUser/ModalUser';
+import AdminFormInput from './AdminFormInput/AdminFormInput';
 
 export {
 	Navbar,
@@ -44,4 +45,5 @@ export {
 	LocationDashBoard,
 	RoomDashBoard,
 	ModalUser,
+	AdminFormInput,
 };
