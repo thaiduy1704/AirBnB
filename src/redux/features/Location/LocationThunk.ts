@@ -137,10 +137,50 @@ const deleteLocationById = createAsyncThunk<
 		return thunkAPI.rejectWithValue('Delete Location failed');
 	}
 });
+
+const uploadLocationImageById = createAsyncThunk<
+	string,
+	{ id: string; image: FormData },
+	{
+		state: RootState;
+	}
+>('location/uploadLocationImageById', async (location, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+		const { id, image } = location;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+		const params = {
+			method: 'POST',
+			url: `${URL}/upload-images/${id}`,
+			headers: {
+				token: token,
+				'Content-Type': 'multipart/form-data',
+			},
+			data: image,
+		};
+
+		await axiosInstance.request(params);
+
+		return 'Upload Location Image Successful';
+	} catch (error) {
+		return thunkAPI.rejectWithValue('Upload Location Image failed');
+	}
+});
+
 export {
 	getLocationList,
 	getLocationListById,
 	createLocation,
 	updateLocationById,
 	deleteLocationById,
+	uploadLocationImageById,
 };

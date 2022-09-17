@@ -8,7 +8,9 @@ import {
 	getAllUsers,
 	getUserById,
 	updateUserById,
+	uploadUserAvatar,
 } from './UserThunk';
+import { uploadLocationImageById } from '../Location/LocationThunk';
 
 export interface IUserState {
 	userList: IUser[];
@@ -124,6 +126,20 @@ const userSlice = createSlice({
 				state.error = payload as string;
 			}
 		});
+		builder.addCase(uploadUserAvatar.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(uploadUserAvatar.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(uploadUserAvatar.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+		
 	},
 });
 export const { searchUser } = userSlice.actions;

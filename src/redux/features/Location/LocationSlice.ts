@@ -1,15 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILocation } from '../../../@types/Location';
+import { transformLanguage } from '../../../utils/util';
 import {
 	createLocation,
 	deleteLocationById,
 	getLocationList,
 	getLocationListById,
 	updateLocationById,
+	uploadLocationImageById,
 } from './LocationThunk';
 
 export interface ILocationState {
 	locationList: ILocation[];
+	searchedLocation: ILocation[];
 	isLoading: boolean;
 	locationSelect: ILocation | null;
 	successMsg: string;
@@ -18,6 +21,7 @@ export interface ILocationState {
 
 const initialState: ILocationState = {
 	locationList: [],
+	searchedLocation: [],
 	locationSelect: null,
 	isLoading: false,
 	successMsg: '',
@@ -27,7 +31,16 @@ const initialState: ILocationState = {
 const locationSlice = createSlice({
 	name: 'location',
 	initialState,
-	reducers: {},
+	reducers: {
+		searchLocation: (state: ILocationState, action: PayloadAction<string>) => {
+			const temp = state.locationList.filter((location) => {
+				if (!location.name) return false;
+				const tempLocationName = transformLanguage(location.name);
+				return tempLocationName.includes(action.payload);
+			});
+			state.searchedLocation = temp;
+		},
+	},
 	extraReducers(builder) {
 		builder.addCase(getLocationList.pending, (state) => {
 			state.isLoading = true;
@@ -35,6 +48,7 @@ const locationSlice = createSlice({
 		builder.addCase(getLocationList.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.locationList = payload;
+			state.searchedLocation = payload;
 		});
 		builder.addCase(getLocationList.rejected, (state, { payload }) => {
 			state.isLoading = false;
@@ -85,7 +99,20 @@ const locationSlice = createSlice({
 			state.isLoading = false;
 			state.error = payload as string;
 		});
+		builder.addCase(uploadLocationImageById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(uploadLocationImageById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(uploadLocationImageById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
 	},
 });
-
+export const { searchLocation } = locationSlice.actions;
 export default locationSlice.reducer;

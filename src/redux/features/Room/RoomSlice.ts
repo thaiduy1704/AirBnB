@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IRoom } from '../../../@types/Room';
+import { transformLanguage } from '../../../utils/util';
 import {
 	bookRoomById,
 	createNewRoom,
@@ -8,10 +9,12 @@ import {
 	getRoomDetailById,
 	getRoomListByLocationId,
 	updateRoomById,
+	uploadRoomImageById,
 } from './RoomThunk';
 
 export interface IRoomState {
 	roomList: IRoom[];
+	searchedRoom: IRoom[];
 	roomSelected: IRoom | null;
 	locationId: string;
 	isLoading: boolean;
@@ -21,6 +24,7 @@ export interface IRoomState {
 
 const initialState: IRoomState = {
 	roomList: [],
+	searchedRoom: [],
 	roomSelected: null,
 	locationId: '61697f97efe193001c0a5b69',
 	isLoading: false,
@@ -35,21 +39,29 @@ const roomSlice = createSlice({
 		selectLocaiton: (state: IRoomState, action: PayloadAction<string>) => {
 			state.locationId = action.payload;
 		},
+		searchRoom: (state: IRoomState, action: PayloadAction<string>) => {
+			const temp = state.roomList.filter((room) => {
+				if (!room.name) return false;
+				const tempRoomUser = transformLanguage(room.name);
+				return tempRoomUser.includes(action.payload);
+			});
+			state.searchedRoom = temp;
+		},
 	},
 	extraReducers(builder) {
-	builder.addCase(getAllRoom.pending, (state) => {
-		state.isLoading = true;
-	});
+		builder.addCase(getAllRoom.pending, (state) => {
+			state.isLoading = true;
+		});
 
-	builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
-		state.isLoading = false;
-		state.roomList = payload;
-	});
-	builder.addCase(getAllRoom.rejected, (state, { payload }) => {
-		state.isLoading = false;
-		state.error = payload as string;
-	});
-
+		builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.roomList = payload;
+			state.searchedRoom = payload;
+		});
+		builder.addCase(getAllRoom.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
 
 		builder.addCase(getRoomListByLocationId.pending, (state) => {
 			state.isLoading = true;
@@ -120,9 +132,22 @@ const roomSlice = createSlice({
 			state.isLoading = false;
 			state.error = payload as string;
 		});
+		builder.addCase(uploadRoomImageById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(uploadRoomImageById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(uploadRoomImageById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
 	},
 });
 
-export const { selectLocaiton } = roomSlice.actions;
+export const { selectLocaiton, searchRoom } = roomSlice.actions;
 
 export default roomSlice.reducer;

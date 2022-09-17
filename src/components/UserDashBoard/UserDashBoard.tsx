@@ -12,6 +12,7 @@ import Button from '../Button/Button';
 import { IUser } from '../../@types/User';
 import { USER_DATA } from '../../constant';
 import Loading from '../Loading/Loading';
+import Image from '../Image/Image';
 import { transformDate, transformLanguage } from '../../utils/util';
 import { usePagination } from '../../redux/hooks/usePagination';
 import ModalUser from '../ModalUser/ModalUser';
@@ -130,6 +131,13 @@ const UserDashBoard = () => {
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, []);
+	if (isLoading) {
+		return (
+			<StyledContainer>
+				<Loading />
+			</StyledContainer>
+		);
+	}
 
 	return (
 		<StyledContainer>
@@ -144,7 +152,9 @@ const UserDashBoard = () => {
 				dispatchFunction={
 					formType === 'UPDATE' ? updateUserById : createNewUser
 				}
+				dispatchUploadImageFunction={null}
 				dummyData={USER_DATA}
+				imageName='avatar'
 			/>
 			<StyledHeadButtonContainer>
 				<Button onClickHandler={createNewUser()} fullWidth={false}>
@@ -177,6 +187,7 @@ const UserDashBoard = () => {
 								<StyledTitle>Gender</StyledTitle>
 								<StyledTitle>Address</StyledTitle>
 								<StyledTitle>Type</StyledTitle>
+								<StyledTitle>Image</StyledTitle>
 								<StyledTitle>Actions</StyledTitle>
 							</StyledRow>
 						</StyledTableHead>
@@ -191,6 +202,7 @@ const UserDashBoard = () => {
 									gender,
 									address,
 									type,
+									avatar,
 								} = item;
 								return (
 									<StyledRow key={_id}>
@@ -202,6 +214,9 @@ const UserDashBoard = () => {
 										<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
 										<StyledItem>{address}</StyledItem>
 										<StyledItem>{type}</StyledItem>
+										<StyledItem>
+											<Image url={avatar as string} alt={name} />
+										</StyledItem>
 										<StyledItem>
 											<StyledButtonContainer>
 												<Button

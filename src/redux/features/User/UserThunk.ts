@@ -184,6 +184,40 @@ const deleteUserById = createAsyncThunk<string, string, { state: RootState }>(
 	}
 );
 
+const uploadUserAvatar = createAsyncThunk<
+	string,
+	{ image: FormData },
+	{ state: RootState }
+>('user/uploadUserAvatar', async (user, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+		const { image } = user;
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		const params = {
+			method: 'POST',
+			url: `${URL}/upload-avatar`,
+			headers: {
+				token: token,
+				'Content-Type': 'multipart/form-data',
+			},
+			data: image,
+		};
+
+		await axiosInstance.request(params);
+
+		return 'Upload User Avatar Successful';
+	} catch (error: any) {
+		return thunkAPI.rejectWithValue('Upload User Avatar failed');
+	}
+});
+
 export {
 	getAllUsers,
 	getUserById,
@@ -191,4 +225,5 @@ export {
 	createUser,
 	updateUserById,
 	deleteUserById,
+	uploadUserAvatar,
 };

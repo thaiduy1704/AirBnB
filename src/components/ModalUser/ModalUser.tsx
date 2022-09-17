@@ -4,11 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../redux/hooks/hooks';
 import { useOnClickOutside } from '../../redux/hooks/useClickOutSide';
 import Loading from '../Loading/Loading';
-import {
-	transformLanguage,
-	transformDate,
-	mapOriginValueToFormInput,
-} from '../../utils/util';
+import { mapOriginValueToFormInput } from '../../utils/util';
 import {
 	StyledContainer,
 	StyledForm,
@@ -62,31 +58,104 @@ const ModalUser = <T extends { [key: string]: any }>({
 			</StyledContainer>
 		);
 	}
+	const onUploadImageHandler = (e: any) => {
+		const image = new FormData();
+		const file = e.target.files[0];
+
+		if (imageName && file) {
+			image.append(imageName, file);
+			setFormData(image);
+		}
+	};
 	const onSubmitHandler = (data: any) => {
 		setIsModalOpen(false);
 		dispatch(dispatchFunction(data));
 
-		// if (formData) {
-		// 	const imageData = { id: data._id, image: formData };
-		// 	dispatch(dispatchUploadImageFunction(imageData));
-		// }
-		// setFormData(null);
+		if (formData) {
+			const imageData = { id: data._id, image: formData };
+			dispatch(dispatchUploadImageFunction(imageData));
+		}
+		setFormData(null);
 	};
 
-	const objectKeys = Object.keys(data);
+	const dummyDataKeys = Object.keys(dummyData).filter((key) => {
+		if (key === 'deleteAt') return false;
+		if (key === '__v') return false;
+		if (key === 'image') return false;
+		return true;
+	});
+	console.log('dummyDataKeys: ', dummyDataKeys);
+
+	if (formType === 'CREATE') {
+		return (
+			<StyledContainer isModalOpen={isModalOpen}>
+				<StyledForm ref={ref} onSubmit={handleSubmit(onSubmitHandler)}>
+					<StyledTitle>{title}</StyledTitle>
+					<StyledFormBody>
+						{dummyDataKeys.map((key, index) => {
+							const { value, inputType } = mapOriginValueToFormInput(
+								key,
+								dummyData[key]
+							);
+
+							return (
+								<AdminFormInput
+									key={index}
+									id={key}
+									inputName={key}
+									disableInput={disableInput}
+									inputType={inputType}
+									register={register(key)}
+									marginBottom={inputType === 'checkbox'}
+									isChecked={value}
+								/>
+							);
+						})}
+						{dispatchUploadImageFunction && (
+							<AdminFormInput
+								disableInput={disableInput}
+								id='uploadImage'
+								inputName='uploadImage'
+								inputType='file'
+								onChangeHandler={onUploadImageHandler}
+							/>
+						)}
+					</StyledFormBody>
+					<Button fullWidth bgColor='#198754'>
+						Update
+					</Button>
+				</StyledForm>
+			</StyledContainer>
+		);
+	}
+	if (!data)
+		return (
+			<StyledContainer isModalOpen={isModalOpen}>
+				<Loading />
+			</StyledContainer>
+		);
+
+	const objectKeys = Object.keys(data).filter((key) => {
+		if (key === 'deleteAt') return false;
+		if (key === '__v') return false;
+		if (key === 'image') return false;
+
+		return true;
+	});
 
 	return (
 		<StyledContainer isModalOpen={isModalOpen}>
 			<StyledForm ref={ref} onSubmit={handleSubmit(onSubmitHandler)}>
 				<StyledTitle>{title}</StyledTitle>
 				<StyledFormBody>
-					{objectKeys.map((key) => {
+					{objectKeys.map((key, index) => {
 						const { value, inputType } = mapOriginValueToFormInput(
 							key,
 							data[key]
 						);
 						return (
 							<AdminFormInput
+								key={index}
 								id={key}
 								inputName={key}
 								disableInput={disableInput}
@@ -98,6 +167,15 @@ const ModalUser = <T extends { [key: string]: any }>({
 							/>
 						);
 					})}
+					{dispatchUploadImageFunction && (
+						<AdminFormInput
+							disableInput={disableInput}
+							id='uploadImage'
+							inputName='uploadImage'
+							inputType='file'
+							onChangeHandler={onUploadImageHandler}
+						/>
+					)}
 				</StyledFormBody>
 				{formType === 'UPDATE' && (
 					<Button fullWidth bgColor='#ffc107'>
