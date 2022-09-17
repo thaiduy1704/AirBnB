@@ -4,6 +4,8 @@ import {
 	Footer,
 	Loading,
 	Navbar,
+	Review,
+	ReviewContainer,
 	SingleRoomCatalog,
 	SingleRoomDetail,
 } from '../../components';
@@ -29,7 +31,7 @@ const RoomDetail = () => {
 			<Container className='section'>
 				<SingleRoomCatalog />
 				<SingleRoomDetail />
-				<div className='line'></div>
+				<ReviewContainer />
 			</Container>
 			<Footer />
 		</>

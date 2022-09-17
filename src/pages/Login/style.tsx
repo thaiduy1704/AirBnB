@@ -18,7 +18,7 @@ export const Container = styled.main`
 	.login__image {
 		height: 100vh;
 	}
-	
+
 	.login__form {
 		height: 100vh;
 		position: relative;

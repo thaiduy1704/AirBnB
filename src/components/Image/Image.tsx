@@ -1,31 +1,40 @@
 import Skeleton from 'react-loading-skeleton';
 
 import { useProgressiveImg } from '../../redux/hooks/useProgressiveImg';
+import { DEFAULT_IMAGE } from '../../constant';
+import { StyledContainer, StyledImage } from './style';
 
-import { Container } from './style';
-
-interface IIamge {
+interface IImage {
 	url: string;
 	alt: string;
+	gridArea?: string;
+	borderRadius?: string;
 }
 
-const Image = ({ url, alt }: IIamge) => {
+const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
+
+	if (!url) {
+		return (
+			<StyledContainer gridArea={gridArea}>
+				<StyledImage alt={alt} src={DEFAULT_IMAGE} />
+			</StyledContainer>
+		);
+	}
+
 	return (
-		<Container>
+		<StyledContainer gridArea={gridArea}>
 			{isImageLoaded ? (
-				<img src={url} alt={alt} />
+				<StyledImage src={url} alt={alt} borderRadius={borderRadius} />
 			) : (
 				<Skeleton
-					height={`100%`}
-					baseColor='#d9d7d9'
-					highlightColor='#f5f5f5'
-					borderRadius='0.5rem'
+					style={{ lineHeight: 2 }}
+					borderRadius={borderRadius}
 					duration={2}
 				/>
 			)}
-		</Container>
+		</StyledContainer>
 	);
 };
 
-export default Image;
+export default CustomImage;

@@ -21,7 +21,10 @@ import LocationDashBoard from './LocationDashBoard/LocationDashBoard';
 import RoomDashBoard from './RoomDashBoard/RoomDashBoard';
 import ModalUser from './ModalUser/ModalUser';
 import AdminFormInput from './AdminFormInput/AdminFormInput';
-
+import Review from './Review/Review';
+import Line from './Line/Line';
+import ProgressBar from './ProgressBar/ProgressBar';
+import ReviewContainer from './ReviewContainer/ReviewContainer';
 export {
 	Navbar,
 	Footer,
@@ -46,4 +49,8 @@ export {
 	RoomDashBoard,
 	ModalUser,
 	AdminFormInput,
+	Review,
+	Line,
+	ProgressBar,
+	ReviewContainer,
 };
