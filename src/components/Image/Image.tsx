@@ -9,9 +9,16 @@ interface IImage {
 	alt: string;
 	gridArea?: string;
 	borderRadius?: string;
+	widthImage?: string;
 }
 
-const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
+const CustomImage = ({
+	url,
+	alt,
+	gridArea,
+	borderRadius,
+	widthImage,
+}: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
 
 	if (!url) {
@@ -25,7 +32,12 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	return (
 		<StyledContainer gridArea={gridArea}>
 			{isImageLoaded ? (
-				<StyledImage src={url} alt={alt} borderRadius={borderRadius} />
+				<StyledImage
+					src={url}
+					alt={alt}
+					borderRadius={borderRadius}
+					widthImage={widthImage}
+				/>
 			) : (
 				<Skeleton
 					style={{ lineHeight: 2 }}

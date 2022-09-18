@@ -82,7 +82,9 @@ const Navbar = ({ hideSearch }: INavbar) => {
 			</Logo>
 			<Search onSubmit={submitHandle} hide={hideSearch}>
 				<button type='button' ref={ref} style={{ position: 'relative' }}>
-					<h5 onClick={() => setDisableInput(false)}>{title}</h5>
+					<h5 className='AnyWhere' onClick={() => setDisableInput(false)}>
+						{title}
+					</h5>
 					<Input
 						placeholder='Enter Location'
 						disableInput={disableInput}

@@ -8,6 +8,7 @@ import {
 	ReviewContainer,
 	SingleRoomCatalog,
 	SingleRoomDetail,
+	ThinkToKnow,
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { getRoomDetailById } from '../../redux/features/Room/RoomThunk';
@@ -32,6 +33,7 @@ const RoomDetail = () => {
 				<SingleRoomCatalog />
 				<SingleRoomDetail />
 				<ReviewContainer />
+				<ThinkToKnow />
 			</Container>
 			<Footer />
 		</>

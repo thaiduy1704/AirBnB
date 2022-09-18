@@ -42,9 +42,10 @@ const roomSlice = createSlice({
 		searchRoom: (state: IRoomState, action: PayloadAction<string>) => {
 			const temp = state.roomList.filter((room) => {
 				if (!room.name) return false;
-				const tempRoomUser = transformLanguage(room.name);
-				return tempRoomUser.includes(action.payload);
+				const tempRoomName = transformLanguage(room.name);
+				return tempRoomName.includes(action.payload);
 			});
+
 			state.searchedRoom = temp;
 		},
 	},
@@ -55,6 +56,7 @@ const roomSlice = createSlice({
 
 		builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
+			state.successMsg = 'get all room Success';
 			state.roomList = payload;
 			state.searchedRoom = payload;
 		});

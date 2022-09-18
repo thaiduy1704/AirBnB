@@ -51,13 +51,7 @@ const ModalUser = <T extends { [key: string]: any }>({
 		handleSubmit,
 		// formState: { errors },
 	} = useForm();
-	if (!data) {
-		return (
-			<StyledContainer isModalOpen={isModalOpen}>
-				<Loading />
-			</StyledContainer>
-		);
-	}
+
 	const onUploadImageHandler = (e: any) => {
 		const image = new FormData();
 		const file = e.target.files[0];
@@ -84,7 +78,7 @@ const ModalUser = <T extends { [key: string]: any }>({
 		if (key === 'image') return false;
 		return true;
 	});
-	console.log('dummyDataKeys: ', dummyDataKeys);
+	// console.log('dummyDataKeys: ', dummyDataKeys);
 
 	if (formType === 'CREATE') {
 		return (
@@ -122,7 +116,7 @@ const ModalUser = <T extends { [key: string]: any }>({
 						)}
 					</StyledFormBody>
 					<Button fullWidth bgColor='#198754'>
-						Update
+						Create
 					</Button>
 				</StyledForm>
 			</StyledContainer>

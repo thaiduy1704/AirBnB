@@ -2,6 +2,7 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { HiOutlineRefresh } from 'react-icons/hi';
 
 import {
+	createUser,
 	deleteUserById,
 	getAllUsers,
 	getUserById,
@@ -121,6 +122,7 @@ const UserDashBoard = () => {
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
+		// console.log(searchValue);
 	};
 
 	useEffect(() => {
@@ -141,7 +143,7 @@ const UserDashBoard = () => {
 
 	return (
 		<StyledContainer>
-			<ModalUser
+			<ModalUser<IUser>
 				formType={formType}
 				title={modalTitle}
 				isModalOpen={isModalOpen}
@@ -149,9 +151,7 @@ const UserDashBoard = () => {
 				isLoading={isLoading}
 				data={userSelected}
 				disableInput={formType === 'INFO' ? true : false}
-				dispatchFunction={
-					formType === 'UPDATE' ? updateUserById : createNewUser
-				}
+				dispatchFunction={formType === 'UPDATE' ? updateUserById : createUser}
 				dispatchUploadImageFunction={null}
 				dummyData={USER_DATA}
 				imageName='avatar'

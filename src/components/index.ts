@@ -25,6 +25,8 @@ import Review from './Review/Review';
 import Line from './Line/Line';
 import ProgressBar from './ProgressBar/ProgressBar';
 import ReviewContainer from './ReviewContainer/ReviewContainer';
+import ThinkToKnow from './ThinkToKnow/ThinkToKnow';
+import Modal from './Modal/Modal';
 export {
 	Navbar,
 	Footer,
@@ -53,4 +55,6 @@ export {
 	Line,
 	ProgressBar,
 	ReviewContainer,
+	ThinkToKnow,
+	Modal,
 };

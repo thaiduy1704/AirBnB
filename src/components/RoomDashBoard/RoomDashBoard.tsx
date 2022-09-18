@@ -11,8 +11,9 @@ import { transformDate, transformLanguage } from '../../utils/util';
 import { usePagination } from '../../redux/hooks/usePagination';
 import ModalUser from '../ModalUser/ModalUser';
 import { type FormType } from '../ModalUser/ModalUser';
-import { searchRoom } from '../../redux/features/Room/RoomSlice';
+
 import {
+	createNewRoom,
 	deleteRoomById,
 	getAllRoom,
 	getRoomDetailById,
@@ -41,6 +42,7 @@ import {
 	StyledRefreshButton,
 	StyledHeadButtonContainer,
 } from './style';
+import { searchRoom } from '../../redux/features/Room/RoomSlice';
 
 const ROOM_PER_PAGE = 10;
 
@@ -91,7 +93,7 @@ const RoomDashBoard = () => {
 		};
 	};
 
-	const createNewRoom = () => {
+	const createRoom = () => {
 		return () => {
 			setModalTitle('Create Room');
 			setFormType('CREATE');
@@ -118,12 +120,14 @@ const RoomDashBoard = () => {
 	};
 
 	const onSearchHandler = () => {
-		setCurrentPage(0);
 		dispatch(searchRoom(searchValue));
+		setCurrentPage(0);
+		console.log(searchedRoom);
 	};
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
+		// console.log(searchValue);
 	};
 
 	useEffect(() => {
@@ -133,7 +137,7 @@ const RoomDashBoard = () => {
 
 	useEffect(() => {
 		dispatch(getAllRoom());
-	}, []);
+	}, [roomSelected]);
 	if (isLoading) {
 		return (
 			<StyledContainer>
@@ -144,7 +148,7 @@ const RoomDashBoard = () => {
 
 	return (
 		<StyledContainer>
-			<ModalUser
+			<ModalUser<IRoom>
 				formType={formType}
 				title={modalTitle}
 				isModalOpen={isModalOpen}
@@ -160,7 +164,7 @@ const RoomDashBoard = () => {
 				imageName='avatar'
 			/>
 			<StyledHeadButtonContainer>
-				<Button onClickHandler={createNewRoom()} fullWidth={false}>
+				<Button onClickHandler={createRoom()} fullWidth={false}>
 					Add New
 				</Button>
 				<StyledRefreshButton
@@ -176,9 +180,7 @@ const RoomDashBoard = () => {
 				</StyledSearchButton>
 			</StyledSearchContainer>
 			<StyledTableContainer>
-				{isLoading ? (
-					<Loading />
-				) : (
+				<StyledTableContainer>
 					<StyledTable>
 						<StyledTableHead>
 							<StyledRow>
@@ -299,7 +301,7 @@ const RoomDashBoard = () => {
 							})}
 						</StyledTableBody>
 					</StyledTable>
-				)}
+				</StyledTableContainer>
 			</StyledTableContainer>
 			{maxPage !== 0 && (
 				<StyledPaginateContainer>

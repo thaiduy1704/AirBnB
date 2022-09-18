@@ -47,7 +47,7 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 	};
 	const onSumbitHandle = (e: FormEvent) => {
 		e.preventDefault();
-		if (!auth) {
+		if (auth?.message !== 'Đăng Nhập Thành Công ! ') {
 			navigation('/login');
 		}
 		dispatch(
@@ -120,7 +120,7 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 					<p>$500,000</p>
 				</div>
 				<div className='successBook'>
-					<h5>{successMsg ? 'Successfull' : ''}</h5>
+					{/* <h5>{successMsg ? 'Successfull' : ''}</h5> */}
 				</div>
 			</div>
 			<div className='line'></div>

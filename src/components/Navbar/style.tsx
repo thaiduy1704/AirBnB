@@ -43,6 +43,9 @@ const Search = styled.form<ISearch>`
 	padding: 1rem 1.5rem;
 	border-radius: 30px;
 	transition: var(--transition);
+	.AnyWhere {
+		font-weight: bold;
+	}
 
 	@media only screen and (min-width: 992px) {
 		position: absolute;

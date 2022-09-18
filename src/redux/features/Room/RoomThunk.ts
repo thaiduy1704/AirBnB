@@ -106,7 +106,7 @@ const bookRoomById = createAsyncThunk<
 			user: { type: userType },
 			token,
 		} = auth;
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		// if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 		const params = {
 			method: 'POST',
 			url: `${URL}/booking`,

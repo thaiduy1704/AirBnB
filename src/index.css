@@ -43,14 +43,15 @@ code {
 	--breakpoint-medium: 1400px;
 
 	--spacing: 0.1rem;
-	--radius: 0.75rem;
+	--radius: 1rem;
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 	--box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-	--max-width: 1400px;
+	--max-width: 1600px;
 	--min-width: 620px;
 	--navbar-height: 8.5rem;
 	--footer-height: 5rem;
+	--padding-inline-small-device: 2rem;
 }
 
 html {
@@ -170,10 +171,6 @@ p {
 	}
 }
 
-.danger {
-	color: var(--clr-danger);
-}
-
 /*  global classes */
 
 /* section */
@@ -181,7 +178,7 @@ p {
 	margin-top: 8rem;
 	/* Ignore Navbar */
 	padding-top: 2rem;
-	padding-inline: 8rem;
+	padding-inline: 10rem;
 }
 
 @media only screen and (max-width: 992px) {
@@ -219,21 +216,8 @@ img {
 	color: var(--clr-danger);
 }
 
-.line {
-	height: 1px;
-	width: 100%;
-	background-color: #dddddd;
-	margin: 5rem auto;
-}
-
 svg {
 	font-size: 2.5rem;
-}
-
-@media only screen and (max-width: 992px) {
-	.line {
-		margin: 2.5rem auto;
-	}
 }
 
 /* Custom btn */
@@ -264,4 +248,14 @@ svg {
 
 .btn:hover::before {
 	opacity: 1;
+}
+
+/* Animation */
+@keyframes spin-animation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
 }
