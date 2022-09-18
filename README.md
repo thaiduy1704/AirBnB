@@ -34,13 +34,13 @@
 </table>
 
 <h2>
-  Link trang web  : https://thaiduyairbnb.vercel.app/
+  Link trang web  : https://thaiduyairbnb.vercel.app
 </h2>
 <h2>
  Demo giao diện Web-AIRBNB
 </h2>
 <p align="center">
    <a href=" https://thaiduyairbnb.vercel.app/">
-      <img src='src\images\default-user-image.jpg' border="none">
+      <img src='./src/images/default-user-image.jpg' border="none">
    </a>
 </p>
