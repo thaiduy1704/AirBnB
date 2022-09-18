@@ -44,6 +44,6 @@
 
 <p align="center">
    <a href=" https://thaiduyairbnb.vercel.app/">
-      <img src='./src/images/default-user-image.jpg' border="none">
+      <img src='./src/images/homepage.jpg' border="none">
    </a>
 </p>
