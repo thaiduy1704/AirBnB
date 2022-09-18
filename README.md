@@ -37,7 +37,7 @@
   Link trang web  : https://thaiduyairbnb.vercel.app
 </h2>
 <h2>
- Demo giao diện Web-AIRBNB
+ Giao diện
 </h2>
 
 **HomePage**
