@@ -37,6 +37,9 @@
   Link trang web  : https://thaiduyairbnb.vercel.app
 </h2>
 <h2>
+  Link youtube demo  : https://www.youtube.com/watch?v=EvlDhPu3Bbk
+</h2>
+<h2>
  Giao diện
 </h2>
 
