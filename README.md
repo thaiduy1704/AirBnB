@@ -20,7 +20,7 @@
    Giới thiệu bản thân
 </h2>
 
-- **Thông tin thành viên**
+**Thông tin thành viên**
 
 <table align="center">
       <tr>
@@ -39,6 +39,9 @@
 <h2>
  Demo giao diện Web-AIRBNB
 </h2>
+
+**HomePage**
+
 <p align="center">
    <a href=" https://thaiduyairbnb.vercel.app/">
       <img src='./src/images/default-user-image.jpg' border="none">
