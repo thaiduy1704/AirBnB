@@ -33,12 +33,10 @@
      </tr>
 </table>
 
-<h2>
  <a href="  https://thaiduyairbnb.vercel.app">
        Link trang web - click
    </a>
- 
-</h2>
+
 <h2>
   <a href=" https://drive.google.com/drive/folders/1lytDqAHv8_hNnI2DGedDWKmF53ytc1J5?usp=sharing">
       Link video demo - click 
