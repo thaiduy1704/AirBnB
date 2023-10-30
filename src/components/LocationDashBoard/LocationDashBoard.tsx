@@ -189,16 +189,16 @@ const LocationDashBoard = () => {
 					</StyledTableHead>
 					<StyledTableBody>
 						{displayLocation.map((item) => {
-							const { _id, name, province, country, valueate, image } = item;
+							const { id, name, province, country, image } = item;
 							return (
-								<StyledRow key={_id}>
-									<StyledItem>{_id}</StyledItem>
+								<StyledRow key={id}>
+									<StyledItem>{id}</StyledItem>
 									<StyledItem>{name ? name : 'Not provided'}</StyledItem>
 									<StyledItem>
 										{province ? province : 'Not provided'}
 									</StyledItem>
 									<StyledItem>{country ? country : 'Not provided'}</StyledItem>
-									<StyledItem>{valueate ? valueate : 0}</StyledItem>
+									{/* <StyledItem>{valueate ? valueate : 0}</StyledItem> */}
 
 									<StyledItem>
 										<Image url={image} alt={name} widthImage='100px' />
@@ -207,17 +207,17 @@ const LocationDashBoard = () => {
 									<StyledItem>
 										<StyledButtonContainer>
 											<Button
-												onClickHandler={showLocation(_id)}
+												onClickHandler={showLocation(id)}
 												bgColor='#28a745'>
 												Info
 											</Button>
 											<Button
-												onClickHandler={updateLocation(_id)}
+												onClickHandler={updateLocation(id)}
 												bgColor='#ffc107'>
 												Update
 											</Button>
 											<Button
-												onClickHandler={deleteLocation(_id)}
+												onClickHandler={deleteLocation(id)}
 												bgColor='#dc3545'>
 												Delete
 											</Button>

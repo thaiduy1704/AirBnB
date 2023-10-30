@@ -17,8 +17,8 @@ const Calender = ({ setBookDate }: ICalender) => {
 	useEffect(() => {
 		if (value.length == 2) {
 			setBookDate({
-				checkIn: value[0],
-				checkOut: value[1],
+				startDate: value[0],
+				endDate: value[1],
 			});
 		}
 	}, [value]);

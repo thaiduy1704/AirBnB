@@ -1,124 +1,99 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from "../../../utils/axios";
 
-import { IAuth } from '../../../@types/Auth';
+import { IAuth } from "../../../@types/Auth";
 
-const URL = '/api/auth';
+const URL = "/api/v1/Auth";
+
+export interface ILogin {
+  personName: string;
+  address: string;
+  profileImage: string;
+  description: string;
+  isMarried: boolean;
+  phoneNumber: string;
+  roleList: string[];
+}
 
 const loginThunk = createAsyncThunk<
-	IAuth,
-	{
-		email: string;
-		password: string;
-	}
->('auth/login', async (user, thunkAPI) => {
-	try {
-		const params = {
-			method: 'POST',
-			url: `${URL}/login`,
-			data: {
-				email: user.email,
-				password: user.password,
-			},
-		};
-		const response = await axiosInstance.request(params);
-		const token = {
-			email: user.email,
-			password: user.password,
-			token: response.data.token,
-			type: response.data.user.type,
-		};
-		localStorage.setItem('userLogin', JSON.stringify(token));
-		return response.data;
-	} catch (error: any) {
-		return thunkAPI.rejectWithValue(error.response.data.message);
-	}
+  IAuth,
+  {
+    email: string;
+    password: string;
+  }
+>("auth/login", async (user, thunkAPI) => {
+  try {
+    const params = {
+      method: "POST",
+      url: `${process.env.REACT_APP_API_DOMAIN}${URL}/login`,
+      data: {
+        email: user.email,
+        password: user.password,
+      },
+    };
+
+    const response = await axiosInstance.request(params);
+    console.log(response);
+    console.log("auththunk", response.data);
+
+    const token = {
+      email: user.email,
+      password: user.password,
+      token: response.data.token,
+      type: response.data.roleList,
+    };
+    localStorage.setItem("userLogin", JSON.stringify(token));
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data.errors);
+  }
 });
 
 export interface IRegister {
-	name: string;
-	email: string;
-	password: string;
-	phone: string;
-	birthday: string;
-	gender: string;
-	address: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  birthday: string;
+  gender: string;
+  address: string;
 }
 
-// const registerThunk = createAsyncThunk<IAuth, IRegister>(
-// 	'auth/register',
-// 	async (user, thunkAPI) => {
-// 		try {
-// 			const params = {
-// 				method: 'POST',
-// 				url: `${URL}/register`,
-// 				data: {
-// 					name: user.name,
-// 					email: user.email,
-// 					password: user.password,
-// 					phone: user.phone,
-// 					birthday: user.birthday,
-// 					gender: user.gender,
-// 					address: user.address,
-// 				},
-// 			};
-
-// 			const reponse = await axiosInstance(params);
-// 			thunkAPI.dispatch(
-// 				loginThunk({
-// 					email: user.email,
-// 					password: user.password,
-// 				})
-// 			);
-// 			return reponse.data;
-// 		} catch (error: any) {
-// 			return thunkAPI.rejectWithValue(error.reponse.data.message);
-// 		}
-// 	}
-// );
-
 const registerThunk = createAsyncThunk<IAuth, IRegister>(
-	'auth/register',
-	async (user, thunkAPI) => {
-		try {
-			const test = {
-				name: user.name,
-				email: user.email,
-				password: user.password,
-				phone: user.phone,
-				birthday: user.birthday,
-				gender: user.gender,
-				address: user.address,
-			};
-			console.log(test);
+  "auth/register",
+  async (user, thunkAPI) => {
+    try {
+      // console.log(test);
 
-			const params = {
-				method: 'POST',
-				url: `${URL}/register`,
-				data: {
-					name: user.name,
-					email: user.email,
-					password: user.password,
-					phone: user.phone,
-					birthday: user.birthday,
-					gender: user.gender === 'Man' ? true : false,
-					address: user.address,
-				},
-			};
+      const params = {
+        method: "POST",
+        url: `${URL}/register`,
+        data: {
+          personName: user.name,
+          email: user.email,
+          Password: user.password,
+          confirmPassword: user.password,
 
-			const response = await axiosInstance.request(params);
-			thunkAPI.dispatch(
-				loginThunk({
-					email: user.email,
-					password: user.password,
-				})
-			);
-			return response.data;
-		} catch (error: any) {
-			return thunkAPI.rejectWithValue(error.response.data.message);
-		}
-	}
+          phone: user.phone,
+          birthday: user.birthday,
+          gender: user.gender === "Man" ? true : false,
+          address: user.address,
+        },
+      };
+
+      const response = await axiosInstance.request(params);
+      thunkAPI.dispatch(
+        loginThunk({
+          email: user.email,
+          password: user.password,
+        })
+      );
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
 );
 
 export { loginThunk, registerThunk };

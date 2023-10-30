@@ -5,23 +5,25 @@ import { logout } from '../../redux/features/Auth/AuthSlice';
 import { Container } from './style';
 
 const ModalNavbar = () => {
-	const { auth } = useAppSelector((store) => store.auth);
+	const { auth ,userType} = useAppSelector((store) => store.auth);
+	// const {} = useAppSelector((store)=>store.user);
 	const dispatch = useAppDispatch();
 	const navigation = useNavigate();
 	const logoutHandle = () => {
 		dispatch(logout());
 		navigation('/');
 	};
-
+	console.log("ModalNavbar: ",auth?.roleList);
+	
 	if (auth) {
 		return (
 			<Container>
-				{auth.user.type === 'ADMIN' ? (
+				{userType ==='ADMIN' ? (
 					<Link to='/admin' className='btn-link bold'>
 						Admin
 					</Link>
 				) : (
-					<Link className='btn-link bold' to={`/user/${auth.user._id}`}>
+					<Link className='btn-link bold' to={`/user/${auth.user.id}`}>
 						User
 					</Link>
 				)}
@@ -44,7 +46,7 @@ const ModalNavbar = () => {
 				<a href='https://github.com/thaiduy1704' className='btn-link'>
 					Host an experience
 				</a>
-				<Link className='btn-link' to={`/user/${auth?.user._id}`}>
+				<Link className='btn-link' to={`/user/${auth?.user.id}`}>
 					Account
 				</Link>
 				<div className='line'></div>

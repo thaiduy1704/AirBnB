@@ -26,12 +26,12 @@ const Categories = () => {
 			navigation={true}
 			modules={[Navigation]}>
 			{locationList.map((location) => {
-				const { _id, image, province } = location;
+				const { id, image, province } = location;
 				return (
 					<SwiperSlide
-						key={_id}
+						key={id}
 						onClick={() => {
-							dispatch(selectLocaiton(_id));
+							dispatch(selectLocaiton(id));
 						}}>
 						<Item>
 							<div className='image-container'>

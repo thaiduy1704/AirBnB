@@ -9,7 +9,7 @@ import { Navbar } from '../../components';
 
 const User = () => {
 	const { id } = useParams();
-	console.log(id);
+	// console.log(id);
 
 	const { auth } = useAppSelector((store) => store.auth);
 	if (!auth) {
@@ -26,7 +26,7 @@ const User = () => {
 		type,
 		avatar,
 	} = auth.user;
-	console.log(auth.user);
+	// console.log(auth.user);
 
 	return (
 		<>

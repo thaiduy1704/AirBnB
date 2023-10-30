@@ -8,15 +8,15 @@ import Card from '../Card/Card';
 const SingleRoomDetail = () => {
 	const { roomSelected } = useAppSelector((store) => store.room);
 	const [bookDate, setBookDate] = useState({
-		checkIn: new Date(),
-		checkOut: new Date(),
+		startDate: new Date(),
+		endDate: new Date(),
 	});
 
 	const [countNight, setCountNight] = useState(0);
 	useEffect(() => {
-		const count = bookDate.checkOut
+		const count = bookDate.startDate
 			? Math.round(
-					(bookDate.checkOut.getTime() - bookDate.checkIn.getTime()) /
+					(bookDate.endDate.getTime() - bookDate.startDate.getTime()) /
 						(1000 * 3600 * 24)
 			  )
 			: 0;
@@ -42,7 +42,7 @@ const SingleRoomDetail = () => {
 				countNight={countNight}
 				bookDate={bookDate}
 				pricePerNight={roomSelected.price}
-				roomId={roomSelected._id}
+				roomId={roomSelected.id}
 			/>
 		</Container>
 	);

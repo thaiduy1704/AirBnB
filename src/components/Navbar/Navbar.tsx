@@ -50,10 +50,10 @@ const Navbar = ({ hideSearch }: INavbar) => {
 	};
 	useEffect(() => {
 		let transformedLocation = locationList.map((item) => {
-			const { _id, province, name } = item;
+			const { id, province, name } = item;
 			const temp = {
 				location: `${province}, ${name}`,
-				id: _id,
+				id: id,
 			};
 			return temp;
 		});

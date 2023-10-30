@@ -15,7 +15,7 @@ const RoomList = () => {
 	}, [locationId]);
 	if (isLoading) return <Loading />;
 
-	console.log(locationId);
+	// console.log(locationId);
 
 	return (
 		<>
@@ -23,9 +23,9 @@ const RoomList = () => {
 			<Container>
 				<RoomListDiv>
 					{roomList.map((room) => {
-						console.log(room);
+						// console.log(room);
 
-						return <RoomListSingle {...room} key={room._id} />;
+						return <RoomListSingle {...room} key={room.id} />;
 					})}
 				</RoomListDiv>
 

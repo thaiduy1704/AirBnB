@@ -43,13 +43,13 @@ const Login = () => {
 			if (error === 'Không tìm thấy email phù hợp') {
 				setErrorStatus('Your email is not exist');
 			} else {
-				setErrorStatus('Your email or password is not valid');
+				setErrorStatus(error);
 			}
 		}
 		return;
 	}, [error, errorStatus, errors]);
 
-	console.log(errors);
+	
 	return (
 		<Container>
 			<div className='login__form flex-center'>

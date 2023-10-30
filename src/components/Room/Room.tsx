@@ -5,13 +5,15 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { Container } from './style';
 import Image from '../Image/Image';
 
-const Room = ({ _id, name, image, locationId, price }: IRoom) => {
+const Room = ({ id, name, imageList, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
-
+	const firstImage = imageList[0];
+	
+	
 	return (
-		<Container to={`/roomDetail/${_id}`}>
+		<Container to={`/roomDetail/${id}`}>
 			<div className='img-container'>
-				{isLoading ? <Skeleton /> : <Image url={image} alt={name} />}
+				{isLoading ? <Skeleton /> : <Image url={firstImage.highQualityUrl} alt={name} />}
 			</div>
 			<div className='info'>
 				{isLoading ? <Skeleton /> : <h5>{name}</h5>}

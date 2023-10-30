@@ -11,11 +11,11 @@ const RoomList = () => {
 	useEffect(() => {
 		dispatch(getRoomListByLocationId());
 	}, [locationId]);
-
+	// console.log(roomList);
+	
 	if (roomList.length === 0) {
 		return (
 			<h1 style={{ marginInline: 'auto', textAlign: 'center' }}>
-				{' '}
 				Sorry, there are no room available!
 			</h1>
 		);
@@ -26,7 +26,7 @@ const RoomList = () => {
 			<h1>Hotel-Resort</h1>
 			<div className='content'>
 				{roomList.map((room) => {
-					return <Room key={room._id} {...room} />;
+					return <Room key={room.id} {...room} />;
 				})}
 			</div>
 		</Container>

@@ -15,21 +15,27 @@ export interface ISingleRoomInfo extends IRoom {
 }
 
 const SingleRoomInfo = ({
+	id,
+	imageList,
 	name,
-	guests,
-	bedRoom,
-	bath,
-	description,
-	kitchen,
-	elevator,
-	hotTub,
-	pool,
-	indoorFireplace,
-	dryer,
-	gym,
-	wifi,
-	heating,
-	cableTV,
+	homeType,
+	roomType,
+	totalBathrooms,
+	totalBedrooms,
+	totalOccupancy,
+	address,
+	sumary,
+	hasTV,
+	hasAirCon,
+	hasInternet,
+	hasKitchen,
+	price,
+	publisedAt,
+	longitude,
+	latitude,
+	locationId,
+	reservationId,
+	userId,
 	bookDate,
 	setBookDate,
 	countNight,
@@ -40,7 +46,7 @@ const SingleRoomInfo = ({
 				<div>
 					<h4>{name}</h4>
 					<p>
-						{guests} guests &middot; {bedRoom} bedroom &middot; {bath} bath
+						{totalOccupancy} guests &middot; {totalBedrooms} bedroom &middot; {totalBathrooms} bath
 					</p>
 				</div>
 				<img src='../../images/image1.jpg' alt='logo' />
@@ -87,14 +93,14 @@ const SingleRoomInfo = ({
 
 			<div className='detail__comment'>
 				<h3>Description</h3>
-				<p>{description}</p>
+				<p>{sumary}</p>
 			</div>
 			<div className='line'></div>
 			{/*Offer*/}
 
 			<div className='detail__offer'>
 				<h3>What this place offers</h3>
-				<div className='detail__offer-container'>
+				{/* <div className='detail__offer-container'>
 					<div className='detail__offer-item'>
 						<p className={`${kitchen ? '' : 'disable__offer'}`}>
 							{logo['kitchen']} kitchen
@@ -145,7 +151,7 @@ const SingleRoomInfo = ({
 							{logo['cableTV']} cableTV
 						</p>
 					</div>
-				</div>
+				</div> */}
 			</div>
 			<div className='line'></div>
 			{/*Calender*/}

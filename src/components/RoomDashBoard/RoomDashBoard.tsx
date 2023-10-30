@@ -207,90 +207,35 @@ const RoomDashBoard = () => {
 						</StyledTableHead>
 						<StyledTableBody>
 							{displayRoom.map((item) => {
-								const {
-									_id,
-									name,
-									guests,
-									bedRoom,
-									bath,
-									elevator,
-									hotTub,
-									pool,
-									indoorFireplace,
-									dryer,
-									gym,
-									kitchen,
-									wifi,
-									heating,
-									cableTV,
-									// description,
-									image,
-									price,
-								} = item;
+								const{id,imageList,name,homeType,roomType,totalBathrooms,totalBedrooms,totalOccupancy,address,sumary,hasTV,hasAirCon,hasInternet,hasKitchen,price,publisedAt,longitude,latitude,locationId,reservationId,userId  
+								}= item
 								return (
-									<StyledRow key={_id}>
-										<StyledItem>{_id}</StyledItem>
+									<StyledRow key={id}>
+										<StyledItem>{id}</StyledItem>
 										<StyledItem>{name}</StyledItem>
-										<StyledItem>{guests ? guests : 0}</StyledItem>
-										<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
-										<StyledItem>
-											{bath ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{elevator ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{hotTub ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{pool ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{indoorFireplace ? (
-												<StyledTickIcon />
-											) : (
-												<StyledStopIcon />
-											)}
-										</StyledItem>
-										<StyledItem>
-											{dryer ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{gym ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{kitchen ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{wifi ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{heating ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
+										
+									
 										{/* <StyledItem>
 											{description ? description : 'Empty'}
 										</StyledItem> */}
 										<StyledItem>
-											<Image url={image} alt={name} />
+											<Image url={imageList[0].lowQualityUrl} alt={name} />
 										</StyledItem>
 										<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
 										<StyledItem>
 											<StyledButtonContainer>
 												<Button
-													onClickHandler={showRoom(_id)}
+													onClickHandler={showRoom(id)}
 													bgColor='#28a745'>
 													Info
 												</Button>
 												<Button
-													onClickHandler={updateRoom(_id)}
+													onClickHandler={updateRoom(id)}
 													bgColor='#ffc107'>
 													Update
 												</Button>
 												<Button
-													onClickHandler={deleteRoom(_id)}
+													onClickHandler={deleteRoom(id)}
 													bgColor='#dc3545'>
 													Delete
 												</Button>

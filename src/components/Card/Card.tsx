@@ -11,8 +11,8 @@ import { bookRoomById } from '../../redux/features/Room/RoomThunk';
 interface ICard {
 	pricePerNight: number;
 	bookDate: {
-		checkIn: Date;
-		checkOut: Date;
+		startDate: Date;
+		endDate: Date;
 	};
 	countNight: number;
 	setCheckInHandle?: any;
@@ -20,15 +20,15 @@ interface ICard {
 }
 const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 	const [checkInDate, setCheckInDate] = useState(
-		moment(bookDate.checkIn).format('l')
+		moment(bookDate.startDate).format('l')
 	);
 	const [checkOutDate, setCheckOutDate] = useState(
-		moment(bookDate.checkOut).format('l')
+		moment(bookDate.endDate).format('l')
 	);
 
 	useEffect(() => {
-		setCheckInDate(moment(bookDate.checkIn).format('L'));
-		setCheckOutDate(moment(bookDate.checkOut).format('L'));
+		setCheckInDate(moment(bookDate.startDate).format('L'));
+		setCheckOutDate(moment(bookDate.endDate).format('L'));
 	}, [bookDate]);
 
 	const { auth } = useAppSelector((store) => store.auth);
@@ -39,7 +39,7 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 	const onChangeDateHandle = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
 		const value = e.target.value;
-		if (name === 'check-in') {
+		if (name === 'start-date') {
 			setCheckInDate(value);
 		} else {
 			setCheckOutDate(value);
@@ -49,45 +49,52 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 		e.preventDefault();
 		if (auth?.message !== 'Đăng Nhập Thành Công ! ') {
 			navigation('/login');
+		} 
+		if(auth)	{
+			dispatch(
+				bookRoomById({
+					userId: auth?.user.id ,
+					roomId: roomId,
+					startDate: checkInDate,
+					endDate: checkOutDate,
+					totalGuests: 2,
+				})
+			);
 		}
-		dispatch(
-			bookRoomById({
-				roomId: roomId,
-				checkIn: checkInDate,
-				checkOut: checkOutDate,
-			})
-		);
+			
+			
+		
 	};
 	return (
 		<Container>
 			<h3>
-				${pricePerNight.toLocaleString()} VND
+				${pricePerNight.toLocaleString()}
 				<span className='light'> /night</span>
 			</h3>
 			<form onSubmit={onSumbitHandle}>
 				<div className='card__schedule'>
 					<div className='schedule__checkIn'>
 						<button type='button' className='btn-checkIn'>
-							<label htmlFor='check-in'>
+							<label htmlFor='start-date'>
 								<h5>CHECK-IN</h5>
 							</label>
 							<input
 								value={checkInDate}
 								type='text'
-								name='check-in'
-								id='check-in'
+								name='start-date'
+								id='start-date'
 								onChange={onChangeDateHandle}
 							/>
 						</button>
 						<button type='button' className='btn-checkOut'>
-							<label htmlFor='check-in'>
+							<label htmlFor='end-date'>
 								<h5>CHECK-OUT</h5>
 							</label>
 							<input
 								value={checkOutDate}
 								type='text'
-								name='check-out'
-								id='check-out'
+								name='end-date'
+								id='end-date'
 								onChange={onChangeDateHandle}
 							/>
 						</button>
@@ -97,12 +104,12 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 							<h5>GUESTS</h5>
 							<p>2 guests</p>
 						</div>
-						<button type='submit'>
+						<button>
 							<MdOutlineKeyboardArrowDown />
 						</button>
 					</div>
 				</div>
-				<Button fullWidth>Check Availability</Button>
+				<Button  fullWidth>Check Availability</Button>
 			</form>
 			<div className='card__detail'>
 				<div className='card__detail--item'>
@@ -113,21 +120,21 @@ const Card = ({ pricePerNight, bookDate, countNight, roomId }: ICard) => {
 				</div>
 				<div className='card__detail--item'>
 					<p className='text-underline'>Cleaning fee</p>
-					<p>$200,000</p>
+					<p>$200</p>
 				</div>
 				<div className='card__detail--item'>
 					<p className='text-underline'>Service fee</p>
-					<p>$500,000</p>
+					<p>$500</p>
 				</div>
 				<div className='successBook'>
-					{/* <h5>{successMsg ? 'Successfull' : ''}</h5> */}
+					<h5>{successMsg ? 'Successfull' : ''}</h5>
 				</div>
 			</div>
 			<div className='line'></div>
 			<div className='card__total'>
 				<h4>Total before taxes</h4>
 				<h4>
-					${(pricePerNight * countNight + 200000 + 500000).toLocaleString()} VND
+					${(pricePerNight * countNight + 200 + 500).toLocaleString()}
 				</h4>
 			</div>
 		</Container>

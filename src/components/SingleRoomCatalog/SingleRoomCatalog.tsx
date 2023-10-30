@@ -19,16 +19,19 @@ const SingleRoomCatalog = () => {
 		query: '(max-width:992px)',
 	});
 	if (!roomSelected) return <Loading />;
-	const { name, image, locationId } = roomSelected;
-
+	const { name, imageList, locationId} = roomSelected;
+	
+	console.log();
+	
+	const image = imageList[1].highQualityUrl
 	return (
 		<Container>
 			<h3 className='location-name'>
-				{name},{locationId ? locationId.name : 'not provided'},{''}
-				{locationId ? locationId.province : 'not provided'}
+				{name},{locationId ? locationId.province : 'Cần Thơ'},{''}
+				{locationId ? locationId.province : 'Cần Thơ'}
 			</h3>
 			<div className='title'>
-				<h5>{locationId ? locationId.province : 'not provided'}</h5>
+				<h5>{locationId ? locationId.country : 'Việt Nam'}</h5>
 				<div className='sub-title'>
 					<a className='flex-center' href='https://github.com/thaiduy1704'>
 						<FiShare /> <span>share</span>
@@ -40,17 +43,25 @@ const SingleRoomCatalog = () => {
 			</div>
 			{isMobileDevice ? (
 				<Catalog images={[...dummyImageData, image]} />
-			) : (
-				<div className='photos'>
-					<img className='main-image' src={image} alt={name} />
-					<img className='image-1' src={dummyImageData[0]} alt={name} />
-					<img className='image-2' src={dummyImageData[1]} alt={name} />
-					<img className='image-3' src={dummyImageData[2]} alt={name} />
-					<img className='image-4' src={dummyImageData[3]} alt={name} />
-				</div>
-			)}
+			) :(  <div className="photos">
+			<div className="main-image">
+			  <img src={image} alt={image} />
+			</div>
+			{imageList.map((image, index) => (
+			  <div
+				key={index}
+				className={`image-${index + 1}`}
+				style={{
+				  gridArea: `image-${index + 1}`,
+				}}
+			  >
+				<img src={image.highQualityUrl} alt={image.title} />
+			  </div>
+			))}
+		  </div>) }
 		</Container>
 	);
 };
 
 export default SingleRoomCatalog;
+

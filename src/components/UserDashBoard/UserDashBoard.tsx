@@ -194,7 +194,7 @@ const UserDashBoard = () => {
 						<StyledTableBody>
 							{displayUser.map((item) => {
 								const {
-									_id,
+									id,
 									name,
 									email,
 									phone,
@@ -205,8 +205,8 @@ const UserDashBoard = () => {
 									avatar,
 								} = item;
 								return (
-									<StyledRow key={_id}>
-										<StyledItem>{_id}</StyledItem>
+									<StyledRow key={id}>
+										<StyledItem>{id}</StyledItem>
 										<StyledItem>{name}</StyledItem>
 										<StyledItem>{email}</StyledItem>
 										<StyledItem>{phone}</StyledItem>
@@ -220,17 +220,17 @@ const UserDashBoard = () => {
 										<StyledItem>
 											<StyledButtonContainer>
 												<Button
-													onClickHandler={showUser(_id)}
+													onClickHandler={showUser(id)}
 													bgColor='#28a745'>
 													Info
 												</Button>
 												<Button
-													onClickHandler={updateUser(_id)}
+													onClickHandler={updateUser(id)}
 													bgColor='#ffc107'>
 													Update
 												</Button>
 												<Button
-													onClickHandler={deleteUser(_id)}
+													onClickHandler={deleteUser(id)}
 													bgColor='#dc3545'>
 													Delete
 												</Button>

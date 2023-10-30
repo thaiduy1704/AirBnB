@@ -1,12 +1,13 @@
-import { IRoom } from './Room';
-import { IUser } from './User';
+import { IRoom } from "./Room";
+import { IUser } from "./User";
 
 export interface IBooking {
-	deleteAt: boolean;
-	_id: string;
-	roomId: IRoom;
-	userId: IUser | null;
-	checkIn: Date;
-	checkOut: Date;
-	__v: number;
+  deleteAt: boolean;
+  id: string;
+  roomId: IRoom;
+  userId: IUser | null;
+  startDate: Date;
+  endDate: Date;
+  price: float;
+  total: float;
 }

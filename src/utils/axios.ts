@@ -11,8 +11,8 @@ const axiosInstance = axios.create({
 	baseURL: process.env.REACT_APP_API_DOMAIN,
 });
 //Alter defaults after instance has been created
-axiosInstance.defaults.headers.common[
-	'tokenByClass'
-] = `${process.env.REACT_APP_TOKEN}`;
+axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${process.env.REACT_APP_TOKEN}`;
 
 export { axiosInstance };
+
+
