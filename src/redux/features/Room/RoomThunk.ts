@@ -3,11 +3,10 @@ import { axiosInstance } from "../../../utils/axios";
 import { IRoom } from "../../../@types/Room";
 import { RootState } from "../../store";
 import { UNAUTHENTICATED, UNAUTHORIZED } from "../../../constant/Error/Error";
-import { log } from "console";
 
 const URL = "/api/v1/Room";
 const URL_BOOKING = "/api/v1/Reservation";
-
+const URl_LOCATION = "/api/v1/Location";
 const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
   "room/getAllRoom",
   async (_, thunkAPI) => {
@@ -37,14 +36,13 @@ const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
 
 const getRoomListByLocationId = createAsyncThunk<
   IRoom[],
-  void,
+  string,
   { state: RootState }
->("room/getRoomListByLocationId", async (_, thunkAPI) => {
-  const { room } = thunkAPI.getState();
+>("room/getRoomListByLocationId", async (locationId, thunkAPI) => {
   try {
     const params = {
       method: "GET",
-      url: `${URL}?locationId=${room.locationId}`,
+      url: `${URL}/ByLocation/${locationId}`,
     };
     const response = await axiosInstance.request(params);
     return response.data;

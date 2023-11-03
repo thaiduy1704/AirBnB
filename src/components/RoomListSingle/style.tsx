@@ -5,7 +5,15 @@ const Container = styled.div`
 	grid-template-columns: 25rem 1fr;
 	padding: 2rem;
 	gap: 2rem;
-
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+	.imgList {
+		width: 25rem;
+		height: 20rem;
+	}
 	.action-link {
 		font-size: 2.5rem;
 		color: black;

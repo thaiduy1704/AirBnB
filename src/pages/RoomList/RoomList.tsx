@@ -11,7 +11,7 @@ const RoomList = () => {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(selectLocaiton(locationId as string));
-		dispatch(getRoomListByLocationId());
+		dispatch(getRoomListByLocationId(locationId as string));
 	}, [locationId]);
 	if (isLoading) return <Loading />;
 

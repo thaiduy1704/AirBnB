@@ -7,18 +7,19 @@ import { Container } from './style';
 const ModalNavbar = () => {
 	const { auth ,userType} = useAppSelector((store) => store.auth);
 	// const {} = useAppSelector((store)=>store.user);
+	
 	const dispatch = useAppDispatch();
 	const navigation = useNavigate();
 	const logoutHandle = () => {
 		dispatch(logout());
 		navigation('/');
 	};
-	console.log("ModalNavbar: ",auth?.roleList);
+	console.log("ModalNavbar: ",userType);
 	
 	if (auth) {
 		return (
 			<Container>
-				{userType ==='ADMIN' ? (
+				{auth.user.type ==='ADMIN' ? (
 					<Link to='/admin' className='btn-link bold'>
 						Admin
 					</Link>

@@ -61,6 +61,9 @@ const authSlice = createSlice({
       //   },
       // };
       state.auth = payload;
+      if (state.auth && state.auth.user) {
+        state.auth.user.type = state.userType;
+      }
       state.error = "";
       console.log("auth slice", state.auth.user);
     });

@@ -9,10 +9,10 @@ const RoomList = () => {
 	);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
-		dispatch(getRoomListByLocationId());
+		dispatch(getRoomListByLocationId(locationId));
 	}, [locationId]);
 	// console.log(roomList);
-	
+
 	if (roomList.length === 0) {
 		return (
 			<h1 style={{ marginInline: 'auto', textAlign: 'center' }}>

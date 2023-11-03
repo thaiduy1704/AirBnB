@@ -30,7 +30,10 @@ const RoomListSingle = ({
 }: IRoom) => {
 	return (
 		<Container>
-			<img src={imageList[0].highQualityUrl} alt={name} />
+			<div className='imgList'>
+				<img src={imageList[0].highQualityUrl} alt={name} />
+			</div>
+
 			<div className='info'>
 				<Link className='action-link' to={`/roomDetail/${id}`}>
 					{name}
@@ -42,10 +45,50 @@ const RoomListSingle = ({
 				</p>
 				<div className='line'></div>
 				<p className='detail'>
-					{homeType} HomeType - {totalBedrooms} bedrooms - {totalBathrooms} bathroom
+					{homeType} HomeType - {totalBedrooms} bedrooms - {totalBathrooms}{' '}
+					bathroom
 				</p>
 				<ul className='list'>
-				
+					<li className='list-item'>
+						AirCon{' '}
+						<span>
+							{hasAirCon ? (
+								<TiTickOutline className='success' />
+							) : (
+								<AiOutlineClose className='danger' />
+							)}
+						</span>
+					</li>
+					<li className='list-item'>
+						KitChen{' '}
+						<span>
+							{hasKitchen ? (
+								<TiTickOutline className='success' />
+							) : (
+								<AiOutlineClose className='danger' />
+							)}
+						</span>
+					</li>
+					<li className='list-item'>
+						Television{' '}
+						<span>
+							{hasTV ? (
+								<TiTickOutline className='success' />
+							) : (
+								<AiOutlineClose className='danger' />
+							)}
+						</span>
+					</li>
+					<li className='list-item'>
+						Wifi{' '}
+						<span>
+							{hasInternet ? (
+								<TiTickOutline className='success' />
+							) : (
+								<AiOutlineClose className='danger' />
+							)}
+						</span>
+					</li>
 				</ul>
 				<h5 className='price'>
 					{price.toLocaleString()}VND<span>/Night</span>

@@ -6,7 +6,6 @@ import { useAppSelector } from '../../redux/hooks/hooks';
 import Catalog from '../Catalog/Catalog';
 import Loading from '../Loading/Loading';
 import { Container } from './style';
-
 const dummyImageData = [
 	'https://airbnb.cybersoft.edu.vn/public/images/room/1634894280363_a4.jpg',
 	'https://airbnb.cybersoft.edu.vn/public/images/room/1658146724696_put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg',
@@ -18,12 +17,12 @@ const SingleRoomCatalog = () => {
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width:992px)',
 	});
+
 	if (!roomSelected) return <Loading />;
-	const { name, imageList, locationId} = roomSelected;
-	
-	console.log();
-	
-	const image = imageList[1].highQualityUrl
+
+	const { name, imageList, locationId } = roomSelected;
+	const image = imageList[0].highQualityUrl;
+
 	return (
 		<Container>
 			<h3 className='location-name'>
@@ -43,25 +42,25 @@ const SingleRoomCatalog = () => {
 			</div>
 			{isMobileDevice ? (
 				<Catalog images={[...dummyImageData, image]} />
-			) :(  <div className="photos">
-			<div className="main-image">
-			  <img src={image} alt={image} />
-			</div>
-			{imageList.map((image, index) => (
-			  <div
-				key={index}
-				className={`image-${index + 1}`}
-				style={{
-				  gridArea: `image-${index + 1}`,
-				}}
-			  >
-				<img src={image.highQualityUrl} alt={image.title} />
-			  </div>
-			))}
-		  </div>) }
+			) : (
+				<div className='photos'>
+					<div className='main-image'>
+						<img src={image} alt={image} />
+					</div>
+					{imageList.slice(-4).map((image, index) => (
+						<div
+							key={index}
+							className={`image-${index + 1}`}
+							style={{
+								gridArea: `image-${index + 1}`,
+							}}>
+							<img src={image.highQualityUrl} alt={image.title} />
+						</div>
+					))}
+				</div>
+			)}
 		</Container>
 	);
 };
 
 export default SingleRoomCatalog;
-
