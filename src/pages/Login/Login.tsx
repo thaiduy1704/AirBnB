@@ -49,7 +49,6 @@ const Login = () => {
 		return;
 	}, [error, errorStatus, errors]);
 
-	
 	return (
 		<Container>
 			<div className='login__form flex-center'>
@@ -107,7 +106,7 @@ const Login = () => {
 			</div>
 			<div className='login__image'>
 				<Image
-					url='https://preview.colorlib.com/theme/bootstrap/login-form-01/images/xbg_1.jpg.pagespeed.ic.nj5iPvtRed.webp'
+					url='https://images.unsplash.com/photo-1696508367494-8c68daee9a0f?auto=format&fit=crop&q=80&w=1980&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 					alt='travel'
 				/>
 			</div>

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
 const Container = styled(Link)`
 	display: block;
 	transition: var(--transition);
@@ -10,6 +9,13 @@ const Container = styled(Link)`
 	color: black;
 
 	.img-container {
+		height: 20rem;
+		margin-bottom: 1rem;
+		img {
+			border-radius: var(--radius);
+		}
+	}
+	.lazy-image {
 		height: 20rem;
 		margin-bottom: 1rem;
 		img {

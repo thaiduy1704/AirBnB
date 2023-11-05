@@ -57,7 +57,7 @@ const getRoomDetailById = createAsyncThunk<IRoom, string, { state: RootState }>(
     try {
       const params = {
         method: "GET",
-        url: `${URL}/${roomId}`,
+        url: `${URL}/ById/${roomId}`,
       };
       const response = await axiosInstance(params);
       console.log(response.data);

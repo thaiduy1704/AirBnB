@@ -4,16 +4,31 @@ import { IRoom } from '../../@types/Room';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { Container } from './style';
 import Image from '../Image/Image';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useState } from 'react';
 const Room = ({ id, name, imageList, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
 	const firstImage = imageList[0];
-	
-	
+	const [isLoadingImage, setIsLoadingImage] = useState<Boolean>(false);
+
 	return (
 		<Container to={`/roomDetail/${id}`}>
 			<div className='img-container'>
-				{isLoading ? <Skeleton /> : <Image url={firstImage.highQualityUrl} alt={name} />}
+				{isLoading ? (
+					<Skeleton />
+				) : (
+					<Image url={firstImage.highQualityUrl} alt={name} />
+					// <LazyLoadImage
+					// 	src={
+					// 		isLoadingImage
+					// 			? firstImage.highQualityUrl
+					// 			: firstImage.lowQualityUrl
+					// 	}
+					// 	alt={firstImage.title}
+					// 	effect={isLoadingImage ? 'opacity' : 'blur'}
+					// 	afterLoad={() => setIsLoadingImage(true)}
+					// />
+				)}
 			</div>
 			<div className='info'>
 				{isLoading ? <Skeleton /> : <h5>{name}</h5>}
