@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
@@ -11,6 +11,8 @@ import { transformDate, transformLanguage } from '../../utils/util';
 import { usePagination } from '../../redux/hooks/usePagination';
 import ModalUser from '../ModalUser/ModalUser';
 import { type FormType } from '../ModalUser/ModalUser';
+
+import { useReducer } from 'react';
 
 import {
 	createNewRoom,
@@ -64,6 +66,7 @@ const RoomDashBoard = () => {
 		maxPage,
 		setMaxPage,
 	} = usePagination(roomList.length);
+
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
 
@@ -186,20 +189,18 @@ const RoomDashBoard = () => {
 							<StyledRow>
 								<StyledTitle>Id</StyledTitle>
 								<StyledTitle>Name</StyledTitle>
-								<StyledTitle>Guests</StyledTitle>
-								<StyledTitle>BedRoom</StyledTitle>
-								<StyledTitle>Bath</StyledTitle>
-								<StyledTitle>Elevator</StyledTitle>
-								<StyledTitle>Hot Tubs</StyledTitle>
-								<StyledTitle>Pool</StyledTitle>
-								<StyledTitle>Indoor Fireplace</StyledTitle>
-								<StyledTitle>Dryer</StyledTitle>
-								<StyledTitle>Gym</StyledTitle>
+								<StyledTitle>Occupancy</StyledTitle>
+								<StyledTitle>HomeType</StyledTitle>
+								<StyledTitle>RoomType</StyledTitle>
+								<StyledTitle>Bathrooms</StyledTitle>
+								<StyledTitle>Bedrooms</StyledTitle>
+								<StyledTitle>Address</StyledTitle>
+								<StyledTitle>TV</StyledTitle>
 								<StyledTitle>Kitchen</StyledTitle>
-								<StyledTitle>Wifi</StyledTitle>
-								<StyledTitle>Heating</StyledTitle>
-								<StyledTitle>CableTv</StyledTitle>
-								{/* <StyledTitle>Description</StyledTitle> */}
+								<StyledTitle>AirCon</StyledTitle>
+								<StyledTitle>Internet</StyledTitle>
+								<StyledTitle>Longitude</StyledTitle>
+								<StyledTitle>Latitude</StyledTitle>
 								<StyledTitle>Image</StyledTitle>
 								<StyledTitle>Price</StyledTitle>
 								<StyledTitle>Actions</StyledTitle>
@@ -207,26 +208,51 @@ const RoomDashBoard = () => {
 						</StyledTableHead>
 						<StyledTableBody>
 							{displayRoom.map((item) => {
-								const{id,imageList,name,homeType,roomType,totalBathrooms,totalBedrooms,totalOccupancy,address,sumary,hasTV,hasAirCon,hasInternet,hasKitchen,price,publisedAt,longitude,latitude,locationId,reservationId,userId  
-								}= item
+								const {
+									id,
+									imageList,
+									name,
+									homeType,
+									roomType,
+									totalBathrooms,
+									totalBedrooms,
+									totalOccupancy,
+									address,
+									sumary,
+									hasTV,
+									hasAirCon,
+									hasInternet,
+									hasKitchen,
+									price,
+									publisedAt,
+									longitude,
+									latitude,
+									locationId,
+									reservationId,
+									userId,
+								} = item;
 								return (
 									<StyledRow key={id}>
 										<StyledItem>{id}</StyledItem>
 										<StyledItem>{name}</StyledItem>
-										
-									
-										{/* <StyledItem>
-											{description ? description : 'Empty'}
-										</StyledItem> */}
+										<StyledItem>{totalOccupancy}</StyledItem>
+										<StyledItem>{homeType}</StyledItem>
+										<StyledItem>{roomType}</StyledItem>
+										<StyledItem>{totalBathrooms}</StyledItem>
+										<StyledItem>{totalBedrooms}</StyledItem>
+										<StyledItem>{address}</StyledItem>
+										<StyledItem>{hasTV}</StyledItem>
+										<StyledItem>{hasKitchen}</StyledItem>
+										<StyledItem>{hasInternet}</StyledItem>
+										<StyledItem>{longitude}</StyledItem>
+										<StyledItem>{latitude}</StyledItem>
 										<StyledItem>
-											<Image url={imageList[0].lowQualityUrl} alt={name} />
+											<Image url={imageList[0].highQualityUrl} alt={name} />
 										</StyledItem>
 										<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
 										<StyledItem>
 											<StyledButtonContainer>
-												<Button
-													onClickHandler={showRoom(id)}
-													bgColor='#28a745'>
+												<Button onClickHandler={showRoom(id)} bgColor='#28a745'>
 													Info
 												</Button>
 												<Button

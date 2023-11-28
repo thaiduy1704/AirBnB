@@ -182,7 +182,6 @@ const LocationDashBoard = () => {
 							<StyledTitle>Name</StyledTitle>
 							<StyledTitle>Province</StyledTitle>
 							<StyledTitle>Country</StyledTitle>
-							<StyledTitle>Valuate</StyledTitle>
 							<StyledTitle>Image</StyledTitle>
 							<StyledTitle>Actions</StyledTitle>
 						</StyledRow>
