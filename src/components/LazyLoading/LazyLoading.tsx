@@ -1,38 +1,39 @@
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useProgressiveImg } from '../../redux/hooks/useProgressiveImg';
-import { DEFAULT_IMAGE } from '../../constant';
 import { StyledContainer, StyledImage } from './style';
 
-interface IImage {
+interface IImageLazy {
 	url: string;
 	alt: string;
+	placeholderSrc?: string;
 	gridArea?: string;
 	borderRadius?: string;
 	widthImage?: string;
 }
 
-const CustomImage = ({
+const LazyLoading = ({
 	url,
 	alt,
+	placeholderSrc,
 	gridArea,
 	borderRadius,
 	widthImage,
-}: IImage) => {
+}: IImageLazy) => {
 	const isImageLoaded = useProgressiveImg(url);
-
-	if (!url) {
-		return (
-			<StyledContainer gridArea={gridArea}>
-				<StyledImage alt={alt} src={DEFAULT_IMAGE} />
-			</StyledContainer>
-		);
-	}
 
 	return (
 		<StyledContainer gridArea={gridArea}>
 			{isImageLoaded ? (
 				<StyledImage
 					src={url}
+					alt={alt}
+					borderRadius={borderRadius}
+					widthImage={widthImage}
+				/>
+			) : placeholderSrc ? (
+				<StyledImage
+					src={placeholderSrc}
 					alt={alt}
 					borderRadius={borderRadius}
 					widthImage={widthImage}
@@ -48,4 +49,4 @@ const CustomImage = ({
 	);
 };
 
-export default CustomImage;
+export default LazyLoading;

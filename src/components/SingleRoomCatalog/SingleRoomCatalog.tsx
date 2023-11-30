@@ -6,6 +6,8 @@ import { useAppSelector } from '../../redux/hooks/hooks';
 import Catalog from '../Catalog/Catalog';
 import Loading from '../Loading/Loading';
 import { Container } from './style';
+
+import LazyLoading from '../LazyLoading/LazyLoading';
 const dummyImageData = [
 	'https://airbnb.cybersoft.edu.vn/public/images/room/1634894280363_a4.jpg',
 	'https://airbnb.cybersoft.edu.vn/public/images/room/1658146724696_put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg',
@@ -45,7 +47,11 @@ const SingleRoomCatalog = () => {
 			) : (
 				<div className='photos'>
 					<div className='main-image'>
-						<img src={image} alt={image} />
+						<LazyLoading
+							url={image}
+							placeholderSrc={imageList[0].lowQualityUrl}
+							alt={image}
+						/>
 					</div>
 					{imageList.slice(-4).map((image, index) => (
 						<div
@@ -54,7 +60,11 @@ const SingleRoomCatalog = () => {
 							style={{
 								gridArea: `image-${index + 1}`,
 							}}>
-							<img src={image.highQualityUrl} alt={image.title} />
+							<LazyLoading
+								placeholderSrc={image.lowQualityUrl}
+								url={image.highQualityUrl}
+								alt={image.title}
+							/>
 						</div>
 					))}
 				</div>

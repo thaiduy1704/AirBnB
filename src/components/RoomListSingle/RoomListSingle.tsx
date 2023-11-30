@@ -5,6 +5,7 @@ import { TiTickOutline } from 'react-icons/ti';
 import { IRoom } from '../../@types/Room';
 import { Container } from './style';
 import Image from '../Image/Image';
+import LazyLoading from '../LazyLoading/LazyLoading';
 const RoomListSingle = ({
 	id,
 	imageList,
@@ -31,7 +32,11 @@ const RoomListSingle = ({
 	return (
 		<Container>
 			<div className='imgList'>
-				<img src={imageList[0].highQualityUrl} alt={name} />
+				<LazyLoading
+					placeholderSrc={imageList[0].lowQualityUrl}
+					url={imageList[0].highQualityUrl}
+					alt={name}
+				/>
 			</div>
 
 			<div className='info'>

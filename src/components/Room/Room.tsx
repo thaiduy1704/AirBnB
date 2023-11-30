@@ -6,6 +6,7 @@ import { Container } from './style';
 import Image from '../Image/Image';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useState } from 'react';
+import LazyLoading from '../LazyLoading/LazyLoading';
 const Room = ({ id, name, imageList, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
 	const firstImage = imageList[0];
@@ -17,17 +18,11 @@ const Room = ({ id, name, imageList, locationId, price }: IRoom) => {
 				{isLoading ? (
 					<Skeleton />
 				) : (
-					<Image url={firstImage.highQualityUrl} alt={name} />
-					// <LazyLoadImage
-					// 	src={
-					// 		isLoadingImage
-					// 			? firstImage.highQualityUrl
-					// 			: firstImage.lowQualityUrl
-					// 	}
-					// 	alt={firstImage.title}
-					// 	effect={isLoadingImage ? 'opacity' : 'blur'}
-					// 	afterLoad={() => setIsLoadingImage(true)}
-					// />
+					<LazyLoading
+						url={firstImage.highQualityUrl}
+						alt={name}
+						placeholderSrc={firstImage.lowQualityUrl}
+					/>
 				)}
 			</div>
 			<div className='info'>
