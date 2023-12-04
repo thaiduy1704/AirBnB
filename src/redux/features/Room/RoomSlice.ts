@@ -26,7 +26,7 @@ const initialState: IRoomState = {
   roomList: [],
   searchedRoom: [],
   roomSelected: null,
-  locationId: "22db9684-3fdf-4c8e-8a21-08dbefc918c9",
+  locationId: "2d70e0d6-487c-4a94-a994-08dbf42208f9",
   isLoading: false,
   successMsg: "",
   error: "",

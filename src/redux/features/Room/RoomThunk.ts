@@ -11,15 +11,7 @@ const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
   "room/getAllRoom",
   async (_, thunkAPI) => {
     try {
-      const { auth } = thunkAPI.getState().auth;
-      if (!auth) {
-        return thunkAPI.rejectWithValue(UNAUTHENTICATED);
-      }
-      const {
-        user: { type: userType },
-        token,
-      } = auth;
-      if (userType !== "ADMIN") return thunkAPI.rejectWithValue(UNAUTHORIZED);
+      
       const params = {
         method: "GET",
         url: URL,

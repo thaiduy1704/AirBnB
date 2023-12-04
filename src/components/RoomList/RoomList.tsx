@@ -1,17 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from './style';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
-import { getRoomListByLocationId } from '../../redux/features/Room/RoomThunk';
+import {
+	getAllRoom,
+	getRoomListByLocationId,
+} from '../../redux/features/Room/RoomThunk';
 import Room from '../Room/Room';
 const RoomList = () => {
 	const { isLoading, roomList, locationId } = useAppSelector(
 		(store) => store.room
 	);
+	const [firstLoad, setFirstLoad] = useState<Boolean>(true);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
+		if (firstLoad) {
+			dispatch(getAllRoom());
+			setFirstLoad(false);
+		}
 		dispatch(getRoomListByLocationId(locationId));
 	}, [locationId]);
 	// console.log(roomList);
+	console.log(roomList);
 
 	if (roomList.length === 0) {
 		return (

@@ -18,6 +18,7 @@ const Categories = () => {
 	const isMoblieDevice = useMediaQuery({
 		query: '(max-width:992px)',
 	});
+	const reservedLocations = [...locationList].reverse();
 
 	return (
 		<Container
@@ -25,7 +26,7 @@ const Categories = () => {
 			slidesPerView={isMoblieDevice ? 4 : 8}
 			navigation={true}
 			modules={[Navigation]}>
-			{locationList.map((location) => {
+			{reservedLocations.map((location) => {
 				const { id, image, province } = location;
 				return (
 					<SwiperSlide
