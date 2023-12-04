@@ -1,8 +1,17 @@
+import { RootState } from "./../../store";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../utils/axios";
 import { IRoom } from "../../../@types/Room";
-import { RootState } from "../../store";
 import { UNAUTHENTICATED, UNAUTHORIZED } from "../../../constant/Error/Error";
+
+interface IRoomPaginaion{
+  items:IRoom[],
+  length:number,
+  page:number,
+  pageSize:number,
+  
+}
+
 
 const URL = "/api/v1/Room";
 const URL_BOOKING = "/api/v1/Reservation";
@@ -11,10 +20,9 @@ const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
   "room/getAllRoom",
   async (_, thunkAPI) => {
     try {
-      
       const params = {
         method: "GET",
-        url: URL,
+        url: `${URL}/all`,
       };
       const response = await axiosInstance.request(params);
       return response.data;
@@ -25,7 +33,23 @@ const getAllRoom = createAsyncThunk<IRoom[], void, { state: RootState }>(
     }
   }
 );
-
+const getListRoomPagination = createAsyncThunk<
+  IRoom[],
+  { page: number; pageSize: number },
+  { state: RootState }
+>("room/getRoomListPagination", async ({ page, pageSize }, thunkAPI) => {
+  try {
+    const params = {
+      method: "GET",
+      url: `${URL}?page=${page}&pageSize=${pageSize}`,
+    };
+    const response = await axiosInstance.request(params);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 const getRoomListByLocationId = createAsyncThunk<
   IRoom[],
   string,
@@ -268,4 +292,5 @@ export {
   updateRoomById,
   deleteRoomById,
   uploadRoomImageById,
+  getListRoomPagination,
 };

@@ -6,6 +6,7 @@ import {
   createNewRoom,
   deleteRoomById,
   getAllRoom,
+  getListRoomPagination,
   getRoomDetailById,
   getRoomListByLocationId,
   updateRoomById,
@@ -74,6 +75,18 @@ const roomSlice = createSlice({
       state.roomList = payload;
     });
     builder.addCase(getRoomListByLocationId.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload as string;
+    });
+    builder.addCase(getListRoomPagination.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getListRoomPagination.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.roomList = payload;
+      state.searchedRoom = payload;
+    });
+    builder.addCase(getListRoomPagination.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload as string;
     });
