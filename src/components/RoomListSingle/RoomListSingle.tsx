@@ -34,7 +34,7 @@ const RoomListSingle = ({
 			<div className='imgList'>
 				<LazyLoading
 					placeholderSrc={imageList[0].lowQualityUrl}
-					url={imageList[0].highQualityUrl}
+					url={imageList[0].lowQualityUrl}
 					alt={name}
 				/>
 			</div>

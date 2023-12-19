@@ -19,7 +19,7 @@ const Room = ({ id, name, imageList, locationId, price }: IRoom) => {
 					<Skeleton />
 				) : (
 					<LazyLoading
-						url={firstImage.highQualityUrl}
+						url={firstImage.mediumQualityUrl}
 						alt={name}
 						placeholderSrc={firstImage.lowQualityUrl}
 					/>
